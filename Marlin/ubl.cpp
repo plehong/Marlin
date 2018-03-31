@@ -217,6 +217,7 @@
           if (map_type == 0 && f >= 0.0) SERIAL_CHAR(' ');
           SERIAL_PROTOCOL_F(f, 3);
         }
+        idle();
         if (map_type == 1 && i < GRID_MAX_POINTS_X - 1) SERIAL_CHAR(',');
 
         #if TX_BUFFER_SIZE > 0
@@ -233,7 +234,6 @@
         SERIAL_CHAR(' ');
         SERIAL_EOL();
       }
-      idle();
     }
 
     if (map_type == 0) {
