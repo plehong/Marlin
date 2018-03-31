@@ -142,7 +142,7 @@
 #define EXTRUDERS 1
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
-#define DEFAULT_NOMINAL_FILAMENT_DIA 3.0
+#define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
 //#define SINGLENOZZLE
@@ -795,7 +795,7 @@
 
 //#define UNKNOWN_Z_NO_RAISE // Don't raise Z (lower the bed) if Z is "unknown." For beds that fall when Z is powered off.
 
-//#define Z_HOMING_HEIGHT 4  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_HOMING_HEIGHT 4  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
                              // Be sure you have this distance over your Z_MAX_POS in case.
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
@@ -931,12 +931,12 @@
   /**
    * Enable the G26 Mesh Validation Pattern tool.
    */
-  //#define G26_MESH_VALIDATION
+  #define G26_MESH_VALIDATION
   #if ENABLED(G26_MESH_VALIDATION)
-    #define MESH_TEST_NOZZLE_SIZE    0.4  // (mm) Diameter of primary nozzle.
+    #define MESH_TEST_NOZZLE_SIZE    0.3  // (mm) Diameter of primary nozzle.
     #define MESH_TEST_LAYER_HEIGHT   0.2  // (mm) Default layer height for the G26 Mesh Validation Tool.
     #define MESH_TEST_HOTEND_TEMP  205.0  // (°C) Default nozzle temperature for the G26 Mesh Validation Tool.
-    #define MESH_TEST_BED_TEMP      60.0  // (°C) Default bed temperature for the G26 Mesh Validation Tool.
+    #define MESH_TEST_BED_TEMP     100.0  // (°C) Default bed temperature for the G26 Mesh Validation Tool.
   #endif
 
 #endif
@@ -983,8 +983,10 @@
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 20             // Mesh inset margin on print area
-  #define GRID_MAX_POINTS_X 4       // Don't use more than 15 points per axis, implementation limited.
-  #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
+  #define MESH_OFFSET_X (-5)
+  #define MESH_OFFSET_Y 0
+  #define GRID_MAX_POINTS_X 7       // Don't use more than 15 points per axis, implementation limited.
+  #define GRID_MAX_POINTS_Y 9
 
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
   #define UBL_SAVE_ACTIVE_ON_M500   // Save the currently active mesh in the current slot on M500
@@ -1011,12 +1013,12 @@
  * Override if the automatically selected points are inadequate.
  */
 #if ENABLED(AUTO_BED_LEVELING_3POINT) || ENABLED(AUTO_BED_LEVELING_UBL)
-  #define PROBE_PT_1_X 39
-  #define PROBE_PT_1_Y 175
-  #define PROBE_PT_2_X 39
-  #define PROBE_PT_2_Y 20
-  #define PROBE_PT_3_X 180
-  #define PROBE_PT_3_Y 20
+  #define PROBE_PT_1_X 45       // Probing points for 3-Point leveling of the mesh
+  #define PROBE_PT_1_Y 177.5
+  #define PROBE_PT_2_X 45
+  #define PROBE_PT_2_Y 42.5
+  #define PROBE_PT_3_X 165
+  #define PROBE_PT_3_Y 42.5
 #endif
 
 /**
@@ -1068,7 +1070,7 @@
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (50*60)
+#define HOMING_FEEDRATE_XY (30*60)
 #define HOMING_FEEDRATE_Z  (4*60)
 
 // @section calibrate
